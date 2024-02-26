@@ -1,0 +1,8 @@
+.basepart{
+    padding-left: 40px;
+}
+
+.base{
+    display: flex;
+    justify-content: space-between;
+}

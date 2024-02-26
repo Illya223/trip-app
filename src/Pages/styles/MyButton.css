@@ -1,0 +1,14 @@
+.my-button {
+  width: 180px;
+    background-color: #ddd;
+    border: none;
+    color: black;
+    padding: 40px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 22px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
