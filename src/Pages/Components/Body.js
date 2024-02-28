@@ -6,6 +6,7 @@ function Body({containers,GetWeather= () => {},GetTime= () => {}}){
  
   const [imageUrls, setImageUrls] = useState([]);
   const [weatherData, setWeatherData] = useState({});
+  const [timer, setTimer] = useState(null);
 
 
 
@@ -56,39 +57,60 @@ const fetchCityImageUrl = async (cityName) => {
     return null;
 }
 };
-var timer ;
-function timer(city){
-
-  if (timer) {
-    clearInterval(timer); // Останавливаем предыдущий таймер с этим именем
-  }
 
 
-  timer = setInterval(() => {
-    console.log(city)
-  },1000)
-  
-}
 
 
-function fetchWeather  (city,date1,date2, timerName){
-  /*const apiKey = 'MKQMY8TS86VELA2ADT7G3MJF7'; // Замените на ваш API ключ
-  const Date1 = date1.toISOString().slice(0, 10);
-  const Date2 = date2.toISOString().slice(0, 10);
+
+
+
+ async function fetchTime (city,date1,date2){
+
+  const apiKey = 'S8UPCXF2CS9X9KJCTA96EHGMJ';
+  const Date1 = date1.toISOString();
+  const Date2 = date2.toISOString();
+  // Замените на ваш API ключ
   const apiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${Date1}/${Date2}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
 
-  try {
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    setWeatherData(prevState => ({
-      ...prevState,
-      [city]: data
-    }));
-  } catch (error) {
-    console.error('Error fetching weather data:', error);
-  }*/
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Обработка полученных данных о погоде
+      data.days.map((day,index) => {
+        day.name = city;
+      })
+       GetWeather(data.days);
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+
 
   
+  var todaytemp;
+
+  const Url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
+
+  fetch(Url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Обработка полученных данных о погоде
+      console.log(data.days[0].temp);
+      todaytemp = data.days[0].temp;
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
   
   const targetDate = new Date(date1).getTime();
 
@@ -96,8 +118,8 @@ function fetchWeather  (city,date1,date2, timerName){
     clearInterval(timer); // Останавливаем предыдущий таймер с этим именем
   }
 
-  timer = setInterval(() => {
-   /* const currentDate1 = new Date().getTime();
+  const newTimer = setInterval(() => {
+    const currentDate1 = new Date().getTime();
     const distance = targetDate - currentDate1;
 
     // Вычисляем дни, часы, минуты и секунды
@@ -109,24 +131,32 @@ function fetchWeather  (city,date1,date2, timerName){
     const time = {'days':days,
      'hours': hours,
       'minutes':minutes,
-      'seconds':seconds
+      'seconds':seconds,
+      'img':"https://i.pinimg.com/736x/bf/d7/73/bfd773ea1e375a92cabb75263028d9c3.jpg ",
+      'temp': todaytemp,
+      'city':city
     }
     if (distance <= 0) {
       clearInterval(timer); // Останавливаем таймер при завершении
       
     }
-    GetTime(time)*/
+    GetTime(time)
 
     console.log(city)
-     
+     setTimer(newTimer);
   
   }, 1000);
-
+/*
   const dateArray = [];
   const currentDate = new Date(date1);
 
   while (currentDate <= date2) {
-    dateArray.push({ date: new Date(currentDate),
+    var date = new Date(currentDate);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    
+    dateArray.push({ date: `${day} ${month} ${year}`,
       temp: 10,
       imgurl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Wikinews_weather.png/280px-Wikinews_weather.png"
     });
@@ -134,33 +164,54 @@ function fetchWeather  (city,date1,date2, timerName){
   }
 
   console.log(dateArray);
-
-
-
-    GetWeather(dateArray);
+   */
+  
 };
+
+
 
 const handleClick = (city, startDate, endDate) => {
-  fetchWeather(city, startDate, endDate);
+  fetchTime(city, startDate, endDate)
 };
+
+function ShowDate(currentDate){
+  var date = new Date(currentDate);
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+
+
+  return `${day} ${month} ${year}`;
+
+}
+
 
     return (
         <div className="horizontal-scroll-container">
         <div className="content">
-        <div>
         
+         <div class="container"  onClick={ () => handleClick('Kyiv',new Date('2024-03-3'), new Date('2024-03-5'))}>
+          <img class="imgcity" src={'https://visitukraine.today/media/blog/previews/fAWjVMXYLXywGzneHknrh9tuBRtdH12vJjT5awRu.webp'} />
+          <div class= "dates">
+          <h3><b>City:  {'Kyiv'}</b></h3>
+          <p>Start date:  {'3 марта 2024'}</p>
+          <p>End date:  {'5 марта 2024'}</p>
+          {/* и т.д. */}
+          </div>
+        </div>
       
       {containers.map((container, index) => (
-        <div key={index} onClick={ () => timer(container.selectedCapital)}>
-          <img src={imageUrls[index]} alt={`City ${index + 1}`} />
-          <p> {container.selectedCapital}</p>
-          <p> {container.start_date.toString()}</p>
-          <p> {container.end_date.toString()}</p>
+        <div class="container" key={index} onClick={ () => handleClick(container.selectedCapital,container.start_date,container.end_date)}>
+          <img class="imgcity" src={imageUrls[index]} alt={`City ${index + 1}`} />
+          <div class= "dates">
+          <h3><b>City:  {container.selectedCapital}</b></h3>
+          <p> Start date:  {ShowDate(container.start_date.toString())}</p>
+          <p>End date:  {ShowDate(container.end_date.toString())}</p>
           {/* и т.д. */}
-          
+          </div>
         </div>
       ))}
-    </div>
+    
        
         </div>
       </div>

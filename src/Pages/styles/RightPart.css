@@ -1,0 +1,28 @@
+.rightpart{
+    width: 350px;
+    
+}
+
+#timeleft{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 32px;
+    font-weight: 800;
+    color: white;
+}
+#weather_today{
+    width: 80%;
+    height: 300px;
+    margin: 0px auto;
+    font-size: 80px;
+    font-weight: 500;
+    color: white;
+}
+#today{
+    width: 80%;
+    height: 350px;
+    margin: 250px auto;
+
+}
