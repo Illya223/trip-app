@@ -1,6 +1,6 @@
 .horizontal-scroll-container {
     width: 700px; /* Ширина контейнера */
-    height: 450px; /* Высота контейнера */
+    height: 360px; /* Высота контейнера */
     overflow-x: scroll; /* Включение горизонтальной прокрутки */
     white-space: nowrap; /* Предотвращение переноса содержимого */
      /* Добавляем границу для контейнера */
@@ -29,7 +29,7 @@
   
   .container{
     width: 240px;
-    height: 400px;
+    height: 320px;
     margin-right: 50px;
     border: 0.5px solid #ccc;
   }
@@ -38,7 +38,7 @@
   }
   .imgcity{
     width: 240px;
-    height: 270px;
+    height: 200px;
   }
   .dates{
     padding-left: 30px;

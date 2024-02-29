@@ -5,7 +5,7 @@ function RightPart(time) {
 
 
     function today(){
-        const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
         const dayOfWeek = daysOfWeek[today.getDay()];
 
@@ -14,11 +14,11 @@ function RightPart(time) {
     
 
     return (
-        <div class="rightpart" style={{ backgroundImage: `url(${time.time.img})` }}>
+        <div class="rightpart" style={{ backgroundColor: `${time.time.img}` }}>
            <div id="today">
             <div id="weather_today">
                 <p>{today()}</p>
-                <p>{time.time.temp}</p>
+                <p class="degree_count today">{time.time.temp}<div class="degree">&deg;C</div></p>
                 <p>{time.time.city}</p>
             </div>
             <div id="timeleft">

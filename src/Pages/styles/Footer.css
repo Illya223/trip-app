@@ -1,6 +1,6 @@
  .weather{
      /* Ширина контейнера */
-    height: 220px; /* Высота контейнера */
+    height: 180px; /* Высота контейнера */
     
   }
 
@@ -10,15 +10,21 @@ h3{
 
 .week{
     display: flex;
-    margin-top: 20px;
+    
 }
 .tripday{
     width: 100px;
-    height: 200px;
+    height: 150px;
     margin-right: 30px;
     
 }
 .weatherimg{
     width: 100px;
-    height: 100px;
+    height: 80px;
+}
+.degree1{
+    font-size: 12px;
+}
+.foot{
+    font-size: 16px;
 }

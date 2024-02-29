@@ -63,9 +63,7 @@ const fetchCityImageUrl = async (cityName) => {
 
 
 
-
- async function fetchTime (city,date1,date2){
-
+async function fetchDaysWeather(city,date1,date2){
   const apiKey = 'S8UPCXF2CS9X9KJCTA96EHGMJ';
   const Date1 = date1.toISOString();
   const Date2 = date2.toISOString();
@@ -89,9 +87,13 @@ const fetchCityImageUrl = async (cityName) => {
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
     });
+}
 
 
-  
+
+ async function fetchTime (city,date1,date2){
+
+  const apiKey = 'S8UPCXF2CS9X9KJCTA96EHGMJ';
   var todaytemp;
 
   const Url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
@@ -132,7 +134,7 @@ const fetchCityImageUrl = async (cityName) => {
      'hours': hours,
       'minutes':minutes,
       'seconds':seconds,
-      'img':"https://i.pinimg.com/736x/bf/d7/73/bfd773ea1e375a92cabb75263028d9c3.jpg ",
+      'img':"#241178",
       'temp': todaytemp,
       'city':city
     }
@@ -172,6 +174,8 @@ const fetchCityImageUrl = async (cityName) => {
 
 const handleClick = (city, startDate, endDate) => {
   fetchTime(city, startDate, endDate)
+  fetchDaysWeather(city, startDate, endDate)
+
 };
 
 function ShowDate(currentDate){

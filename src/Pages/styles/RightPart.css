@@ -1,5 +1,7 @@
 .rightpart{
-    width: 350px;
+    width: 400px;
+   
+    border-radius: 20px;
     
 }
 
@@ -16,13 +18,30 @@
     width: 80%;
     height: 300px;
     margin: 0px auto;
-    font-size: 80px;
+    font-size: 30px;
     font-weight: 500;
     color: white;
+}
+#weather_today p{
+    margin:0;
+    text-align: center;
 }
 #today{
     width: 80%;
     height: 350px;
-    margin: 250px auto;
+    margin: 200px auto;
 
+}
+.degree_count{
+    display: flex;
+    
+}
+.degree{
+    font-size: 23px;
+    margin-top:0;
+}
+.today{
+    font-size: 80px;
+    flex-wrap: nowrap;
+    justify-content: center;
 }

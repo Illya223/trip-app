@@ -6,13 +6,13 @@ header{
 header h2{
     display: block; /* Размещаем label на отдельной строке */
   text-align: left;
-  margin:  40px 0;
+  margin:  20px 0;
   
 }
 input[type="search"]{
     max-width: 200px;
     display: block; /* Размещаем label на отдельной строке */
   text-align: left;
-margin: 40px 0;
+margin: 20px 0;
 
 }
