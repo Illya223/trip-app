@@ -2,9 +2,10 @@ import './App.css';
 import Main from './Pages/Main';
 
 
+
 function App() {
   return (
-    <div>
+    <div class="app">
       <Main></Main>
       
     </div>

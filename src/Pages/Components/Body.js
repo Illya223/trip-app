@@ -194,7 +194,7 @@ function ShowDate(currentDate){
         <div className="horizontal-scroll-container">
         <div className="content">
         
-         <div class="container"  onClick={ () => handleClick('Kyiv',new Date('2024-03-3'), new Date('2024-03-5'))}>
+         <div class="container"  onClick={ () => handleClick('Kyiv',new Date('2024-03-3'), new Date('2024-03-5'))} onLoad={ () => handleClick('Kyiv',new Date('2024-03-3'), new Date('2024-03-5'))}>
           <img class="imgcity" src={'https://visitukraine.today/media/blog/previews/fAWjVMXYLXywGzneHknrh9tuBRtdH12vJjT5awRu.webp'} />
           <div class= "dates">
           <h3><b>City:  {'Kyiv'}</b></h3>

@@ -1,0 +1,283 @@
+@media (max-width: 1550px){
+    .base{
+        width: 800px;
+    }
+    .horizontal-scroll-container {
+        width: 500px;
+    }
+}
+@media (max-width: 1300px){
+
+    .base{
+        width: 720px;
+    }
+    .container{
+        width: 200px;
+        height: 280px;
+    }
+    .imgcity{
+        width: 200px;
+        height: 160px;
+    }
+    .horizontal-scroll-container {
+        height: 310px;
+    }
+    .my-button{
+        width: 140px;
+        height: 80px;
+    }
+    .weather{
+        height: 150px;
+    }
+    .tripday{
+        width: 70px;
+        height: 120px;
+    }
+    .weatherimg{
+        width: 70px;
+        height: 50px;
+    }
+    .tripday p{
+        font-size: 12px;
+    }
+    .rightpart{
+        width: 320px;
+    }
+    #today{
+        margin:120px auto;
+    }
+}
+@media (max-width: 1150px){
+    input[type="search"]{
+        padding: 10px;
+        font-size: 14px;
+    }
+    .base{
+        width: 450px;
+    }
+    .container{
+        width: 120px;
+        height: 160px;
+        margin-right: 20px;
+    }
+    .dates{
+        padding-left: 10px;
+        padding-top: 0;
+        font-size: 12px;
+        line-height: 2px;
+    }
+    .dates p{
+        font-size: 10px;
+    }
+    .dates h3{
+        font-size: 12px;
+    }
+    .imgcity{
+        width: 120px;
+        height: 100px;
+    }
+    .horizontal-scroll-container {
+        width: 310px;
+        height: 200px;
+    }
+    .my-button{
+        width: 100px;
+        height: 60px;
+        font-size: 16px;
+        padding: 20px 15px;
+    }
+    svg{
+        width: 15px;
+        height: 15px;
+    }
+    
+    .weather{
+        height: 110px;
+    }
+    .tripday{
+        width: 40px;
+        height: 80px;
+    }
+    .weatherimg{
+        width: 40px;
+        height: 40px;
+    }
+    .tripday p{
+        font-size: 8px;
+    }
+    .degree1{
+        font-size: 8px;
+    }
+    .rightpart{
+        width: 260px;
+    }
+    #today{
+        margin:140px auto;
+        height: 220px;
+    }
+    #weather_today{
+        height: 200px;
+        font-size: 18px;
+    }
+    .today{
+        font-size: 60px;
+    }
+    #timeleft{
+        height: 30px;
+        font-size: 24px;
+    }
+    .modal-content{
+        width: 600px;
+    }
+
+}
+@media (max-width: 800px){
+
+    .base{
+        width: 400px;
+    }
+
+    .horizontal-scroll-container {
+        width: 270px;
+        height: 200px;
+    }
+
+    .my-button{
+        width: 80px;
+        height: 45px;
+        font-size: 14px;
+        padding: 20px 15px;
+    }
+    .my-button p{
+        margin: 0;
+    }
+    svg{
+        width: 10px;
+        height: 10px;
+    }
+    .weather{
+        height: 90px;
+    }
+    .rightpart{
+        width: 240px;
+    }
+    #today{
+        margin:110px auto;
+        height: 220px;
+    }
+    #weather_today{
+        height: 200px;
+        font-size: 18px;
+    }
+    .today{
+        font-size: 60px;
+    }
+
+}
+@media (max-width: 670px){
+    .main{
+        flex-direction: column;
+        align-items: center;
+    }
+    .basepart{
+        padding:0 20px;
+    }
+    .base{
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        margin: 40px 0;
+    }
+    .horizontal-scroll-container {
+        width: 250px;
+        height: 450px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+    }
+    .horizontal-scroll-container::-webkit-scrollbar {
+        width: 5px; ; /* Высота скроллбара */
+      }
+    .weather{
+        overflow-x: scroll;
+        height: 90px;
+    }
+    .content{
+        padding: 0;
+        flex-direction: column;
+    }
+    .container{
+        width: 250px;
+        height: 280px;
+        margin:10px 0;
+    }
+    .imgcity{
+        width: 250px;
+        height: 180px;
+    }
+    .dates p{
+        font-size: 12px;
+    }
+    .dates h3{
+        font-size: 14px;
+    }
+    .dates{
+        padding-left: 15px;
+        padding-top: 10px;
+        font-size: 12px;
+        line-height: 10px;
+    }
+    .my-button{
+        width: 140px;
+        height: 80px;
+        font-size: 18px;
+        padding: 30px 20px;
+        margin-top: 20px;
+    }
+    .my-button p{
+        margin-top: 10px;
+    }
+    svg{
+        width: 15px;
+        height: 15px;
+    }
+    footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom:40px ;
+    }
+    header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    header h2{
+        text-align: center;
+        margin:10px 0;
+    }
+    input[type="search"]{
+        margin: 10px 0;
+    }
+    .modal-content{
+        width: 270px;
+    }
+    .modal-content h2{
+        font-size: 22px;
+    }
+    .modal-content input{
+        width: 80%;
+    }
+    
+}
+@media (max-width: 330px){
+    .base{
+        width: 260px;
+    }
+    .modal-content{
+        width: 250px;
+    }
+}
