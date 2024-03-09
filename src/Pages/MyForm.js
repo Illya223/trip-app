@@ -15,27 +15,27 @@ function MyForm({ showModal, handleClose,onSave = () => {}}) {
   const [formError, setFormError] = useState(false);
   
 
-  
+  //We make an API request to get the names of the capitals 
+  //of all countries of the world for a drop-down list
   useEffect(() => {
     
-      var username = 'illya';
-      fetch(`http://api.geonames.org/searchJSON?q=capital&maxRows=1000&username=${username}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Обработка полученных данных
-    const capitals = data.geonames.map(capital => capital.name);
-    setCapitals(capitals);
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
+              var username = 'illya';
+              fetch(`http://api.geonames.org/searchJSON?q=capital&maxRows=1000&username=${username}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(data => {
+            const capitals = data.geonames.map(capital => capital.name);
+            setCapitals(capitals);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
 
-    
+            
   }, []);
 
   const formRef = useRef(null);
@@ -50,37 +50,37 @@ function MyForm({ showModal, handleClose,onSave = () => {}}) {
   
 
     
-
+// We receive and send data from the form for adding a trip
   const handleAdd = () => {
-    //onSave(formData);
-    // Очищаем форму после добавления данных
-    if (formData.selectedCapital && formData.start_date && formData.end_date) {
     
-    if (typeof onSave === 'function') {
-      onSave(formData); // Вызов функции onSave из пропсов, если она является функцией
-    }
-    setFormData({
-      selectedCapital: '',
-      start_date: formData.start_date ,
-       end_date: formData.end_date
+        if (formData.selectedCapital && formData.start_date && formData.end_date) {
         
-    });
-    setFormError(false);
-  }else{
-  setFormError(true)
-  alert('Please fill in the fields');
+        if (typeof onSave === 'function') {
+          onSave(formData); 
+        }
+        setFormData({
+          selectedCapital: '',
+          start_date: formData.start_date ,
+          end_date: formData.end_date
+            
+        });
+        setFormError(false);
+      }else{
+      setFormError(true)
+      alert('Please fill in the fields');
 }
   };
 
+// Close form
   const handleCancel = () => {
-    // Закрываем форму без сохранения данных
+    
     handleClose();
 
     clearFormInputs()
   };
 
+  // Clear inputs 
   const clearFormInputs = () => {
-    // Очищаем значения инпутов вручную
     setFormData({
       selectedCapital: '',
        start_date: formData.start_date ,
@@ -88,47 +88,53 @@ function MyForm({ showModal, handleClose,onSave = () => {}}) {
     });
   };
 
+  // Filtering and sorting the list of capitals by entered text
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Фильтрация и сортировка списка столиц по введенному тексту
+    
     const filtered = capitals.filter(capital =>
       capital.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredCapitals(filtered);
   };
 
+  //Add name of city
   const handleSelect = (capital) => {
-    setFormData({ ...formData, selectedCapital: capital });
-    setShowDropdown(false);
+        setFormData({ ...formData, selectedCapital: capital });
+        setShowDropdown(false);
   };
 
+  // Show dropdown list
   const handleInputClick = () => {
-    setShowDropdown(true);
+        setShowDropdown(true);
 
   };
+
+  // Add start dates
   const handleStartDateChange = (date) => {
-    setFormData({ ...formData, start_date: date });
-    // Если уже выбрана конечная дата и новая начальная дата позже, сбросим конечную дату
-    if (formData.end_date && date > formData.end_date) {
-      setFormData({ ...formData, end_date: null });
-    }
+          setFormData({ ...formData, start_date: date.toString() });
+          // Если уже выбрана конечная дата и новая начальная дата позже, сбросим конечную дату
+          if (formData.end_date && date > formData.end_date) {
+            setFormData({ ...formData, end_date: null });
+          }
+        };
+
+        // Add end dates 
+        const handleEndDateChange = (date) => {
+          setFormData({ ...formData, end_date: date.toString() });
+          // Если уже выбрана начальная дата и новая конечная дата раньше, сбросим начальную дату
+          if (formData.start_date && date < formData.start_date) {
+            setFormData({ ...formData, start_date: null });
+          }
   };
 
-  const handleEndDateChange = (date) => {
-    setFormData({ ...formData, end_date: date });
-    // Если уже выбрана начальная дата и новая конечная дата раньше, сбросим начальную дату
-    if (formData.start_date && date < formData.start_date) {
-      setFormData({ ...formData, start_date: null });
-    }
-  };
-
-  // Получаем текущую дату
+  // Get the current date
   const currentDate = new Date();
-  // Получаем следующий день после текущей даты
+  // Get the next day after the current date
   const nextDay = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
-  // Добавляем 15 дней к текущей дате
+  // Add 15 days to the current date
   const maxDate = new Date(currentDate.getTime() + 15 * 24 * 60 * 60 * 1000);
 
   
@@ -156,14 +162,14 @@ function MyForm({ showModal, handleClose,onSave = () => {}}) {
                     className="dropdown-select"/>
 
 {showDropdown && (
-          <div className="dropdown-list"> {/* Применяем класс стиля для списка */}
+          <div className="dropdown-list"> {}
             {filteredCapitals.map((capital, index) => (
               <div
                 key={index}
-                className="dropdown-list-item" // Применяем класс стиля для элемента списка
+                className="dropdown-list-item" 
                 onClick={() => handleSelect(capital)}
               >
-                <MdLocationCity className="icon" /> {/* Иконка */}
+                <MdLocationCity className="icon" /> {}
                 {capital}
               </div>
             ))}

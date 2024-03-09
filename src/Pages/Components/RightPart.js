@@ -3,7 +3,7 @@ import '../styles/RightPart.css'
 
 function RightPart(time) {
 
-
+    // Getting days of the week by date
     function today(){
         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const today = new Date();
