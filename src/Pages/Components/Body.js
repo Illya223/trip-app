@@ -3,7 +3,7 @@ import '../styles/Body.css'
 import MyForm from '../MyForm';
 import DeleteButton from './DeleteButton';
 
-function Body({containers,GetWeather= () => {},GetTime= () => {}}){
+function Body({containers,GetWeather= () => {},GetTime= () => {},cityName}){
  
   const [imageUrls, setImageUrls] = useState([]);
   const [weatherData, setWeatherData] = useState({});
@@ -13,13 +13,28 @@ function Body({containers,GetWeather= () => {},GetTime= () => {}}){
   const [currentIndex, setCurrentIndex] = useState(0);
 
   
-
+console.log(cityName)
   
   //console.log(JSON.parse(localStorage.getItem('containers')));
 
   useEffect(() => {
-    console.log(currentIndex); // currentIndex уже будет обновленным
-  }, [currentIndex]);
+   
+    if(currentIndex === undefined || !localContainers.length){
+      console.log(currentIndex)
+  }
+  else if(currentIndex === -1){
+    console.log("");
+  }
+  else{
+    console.log(currentIndex)
+    
+    handleClick(localContainers[currentIndex].selectedCapital,
+        new Date(localContainers[currentIndex].start_date.toString()),
+        new Date(localContainers[currentIndex].end_date.toString()), 
+        localContainers[currentIndex],currentIndex) // currentIndex уже будет обновленным
+     
+  }
+    }, [currentIndex]);
 
 
   useEffect(() => {
@@ -238,18 +253,15 @@ const handleDelete = (selectedContainer, localContainers) => {
  // removeFromLocalStorage(selectedContainer);
 };
 
-const handleNext = (ф) => {
-  console.log(currentIndex);
- setCurrentIndex(); //% localContainers.length
-  console.log(currentIndex);
+const handleNext = () => {
+ 
+ setCurrentIndex(prevIndex => (prevIndex + 1) % containers.length); //% localContainers.length
   
-  handleClick(localContainers[currentIndex].selectedCapital,new Date(localContainers[currentIndex].start_date.toString()),new Date(localContainers[currentIndex].end_date.toString()), localContainers[currentIndex],currentIndex)
 };
 
 const handlePrevious = () => {
   setCurrentIndex(prevIndex => (prevIndex - 1 + localContainers.length) % localContainers.length);
-  console.log(localContainers[currentIndex]);
-  handleClick(localContainers[currentIndex].selectedCapital,new Date(localContainers[currentIndex].start_date.toString()),new Date(localContainers[currentIndex].end_date.toString()), localContainers[currentIndex],currentIndex)
+ 
 };
 
 
@@ -259,18 +271,22 @@ const handlePrevious = () => {
         <div className="horizontal-scroll-container">
         <div className="content">
         
-         <div class="container"  onClick={ () => handleClick('Kyiv',new Date('2024-03-07'), new Date('2024-03-09'))} onLoad={ () => handleClick('Kyiv',new Date('2024-03-07'), new Date('2024-03-09'))}>
+         <div class="container"  onClick={ () => handleClick('Kyiv',new Date('2024-03-07'),
+          new Date('2024-03-09'),0,-1)} onLoad={ () => handleClick('Kyiv',new Date('2024-03-07'),
+           new Date('2024-03-09'),0,-1)}>
           <img class="imgcity" src={'https://visitukraine.today/media/blog/previews/fAWjVMXYLXywGzneHknrh9tuBRtdH12vJjT5awRu.webp'} />
           <div class= "dates">
           <h3><b>City:  {'Kyiv'}</b></h3>
-          <p>Start date:  {'3 марта 2024'}</p>
-          <p>End date:  {'5 марта 2024'}</p>
+          <p>Start date:  {'7 марта 2024'}</p>
+          <p>End date:  {'9 марта 2024'}</p>
           
           </div>
         </div>
       
       {localContainers.map((container, index) => (
-        <div class="container" key={index} onClick={ () => handleClick(container.selectedCapital,new Date(container.start_date.toString()),new Date(container.end_date.toString()), container, index)} >
+        <div class="container" key={index} onClick={ () => handleClick(container.selectedCapital,
+        new Date(container.start_date.toString()),new Date(container.end_date.toString()),
+         container, index)} >
           <img class="imgcity" src={imageUrls[index]} alt={`City ${index + 1}`} />
           <div class= "dates">
           <h3><b>City:  {container.selectedCapital}</b></h3>
@@ -283,10 +299,12 @@ const handlePrevious = () => {
     
        
         </div>
-<DeleteButton onClick={handleDeleteClick}></DeleteButton>
+
       </div>
-      <button onClick={handlePrevious}>Previous</button>
-      <button onClick={handleNext}>Next</button>
+
+      <button class="prevnext" onClick={handlePrevious}>Previous</button>
+      <button class="prevnext" onClick={handleNext}>Next</button>
+      <DeleteButton onClick={handleDeleteClick}></DeleteButton>
     </div>
     )
 }

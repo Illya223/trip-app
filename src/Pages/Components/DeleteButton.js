@@ -1,8 +1,9 @@
 import React from 'react';
+import '../styles/DeleteButton.css'
 
 const DeleteButton = ({ onClick }) => {
     return (
-        <button onClick={onClick}>Delete Containers</button>
+        <button class="deletebutton" onClick={onClick}>Delete</button>
     );
 };
 

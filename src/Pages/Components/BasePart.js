@@ -13,6 +13,9 @@ function BasePart({containertime= () => {}}) {
     const [containers, setContainers] = useState([]);
     const [weatherData, setWeatherData] = useState([]);
     const [timeData,settimeData ] = useState([]);
+    const [cityName, setCityName] = useState(''); 
+
+
 
 
 useEffect(() => {
@@ -45,7 +48,10 @@ useEffect(() => {
       
           containertime(time)
      }
-
+     function GetcityName(Name){
+        setCityName(Name)
+        
+     }
 
     
 
@@ -64,10 +70,10 @@ useEffect(() => {
 
     return (
         <div class="basepart">
-        <Header></Header>
+        <Header GetcityName={GetcityName}></Header>
         <div class="base">
           
-        <Body containers={containers} GetWeather={GetWeather} GetTime={GetTime} ></Body>
+        <Body containers={containers} GetWeather={GetWeather} GetTime={GetTime} cityname={cityName}></Body>
         <MyButton onClick={handleToggleModal}></MyButton>
         
         <MyForm showModal={showModal} handleClose={handleToggleModal} onSave={handleSave}/>
