@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import '../styles/Body.css'
 import MyForm from '../MyForm';
 import DeleteButton from './DeleteButton';
@@ -11,11 +11,39 @@ function Body({containers,GetWeather= () => {},GetTime= () => {},cityName}){
   const [localContainers, setLocalContainers] = useState([]);
   const [selectedContainer, setSelectedContainer] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRefs = useRef([]);
+  const [filteredContainers, setFilteredContainers] = useState([]);
 
   
-console.log(cityName)
   
+
+/*const normalizedCityName = cityName.toLowerCase(); // Приведение к нижнему регистру
+
+const foundCities = localContainers.filter(container => {
+  // Приведение названия города из массива к нижнему регистру
+  const normalizedCity = container.selectedCapital.toLowerCase();
+  // Сравнение с названием города, введенным пользователем
+  return normalizedCity.includes(normalizedCityName);
+});
+
+
+console.log(foundCities)*/
+
   //console.log(JSON.parse(localStorage.getItem('containers')));
+
+  
+  useEffect(() => {
+
+    // Фильтрация контейнеров по поисковому запросу
+    // Поиск первого отфильтрованного контейнера и прокрутка к нему
+    const firstFilteredContainer = containerRefs.current.find(ref => ref);
+    console.log(firstFilteredContainer);
+    if (firstFilteredContainer) {
+      firstFilteredContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [localContainers, cityName]);
+  
+
 
   useEffect(() => {
    
@@ -69,7 +97,9 @@ console.log(cityName)
         localContainers.map(async (container) => {
           try {
             const imageUrl = await fetchCityImageUrl(container.selectedCapital);
+            container.img = imageUrl;
             return imageUrl;
+            
           } catch (error) {
             console.error(`Error fetching image for ${container.selectedCapital}:`, error);
             return null;
@@ -264,7 +294,7 @@ const handlePrevious = () => {
  
 };
 
-
+console.log(localContainers);
 
     return (
       <div>
@@ -283,11 +313,14 @@ const handlePrevious = () => {
           </div>
         </div>
       
-      {localContainers.map((container, index) => (
-        <div class="container" key={index} onClick={ () => handleClick(container.selectedCapital,
+      {localContainers.filter(container =>
+          container.selectedCapital.toLowerCase().includes(cityName.toLowerCase())
+        ).map((container, index) => (
+        <div class="container"  ref={ref => (containerRefs.current[index] = ref)}
+         key={index} onClick={ () => handleClick(container.selectedCapital,
         new Date(container.start_date.toString()),new Date(container.end_date.toString()),
          container, index)} >
-          <img class="imgcity" src={imageUrls[index]} alt={`City ${index + 1}`} />
+          <img class="imgcity" src={container.img} alt={`City ${index + 1}`} />
           <div class= "dates">
           <h3><b>City:  {container.selectedCapital}</b></h3>
           <p> Start date:  {ShowDate(new Date(container.start_date.toString()))}</p>

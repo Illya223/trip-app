@@ -172,6 +172,15 @@
     .today{
         font-size: 60px;
     }
+    .deletebutton{
+        padding: 10px;
+        font-size: 15px;
+
+    }
+    .prevnext{
+        padding: 10px;
+        font-size: 15px;
+    }
 
 }
 @media (max-width: 670px){

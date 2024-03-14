@@ -35,7 +35,7 @@ useEffect(() => {
           console.log(formData)
           setContainers((prevContainers) => [
               ...prevContainers,
-              { selectedCapital: formData.selectedCapital, start_date: formData.start_date, end_date: formData.end_date}
+              { selectedCapital: formData.selectedCapital, start_date: formData.start_date, end_date: formData.end_date, img: ""}
             ]);
      }
     //  Receiving weather data
@@ -73,7 +73,7 @@ useEffect(() => {
         <Header GetcityName={GetcityName}></Header>
         <div class="base">
           
-        <Body containers={containers} GetWeather={GetWeather} GetTime={GetTime} cityname={cityName}></Body>
+        <Body containers={containers} GetWeather={GetWeather} GetTime={GetTime} cityName={cityName}></Body>
         <MyButton onClick={handleToggleModal}></MyButton>
         
         <MyForm showModal={showModal} handleClose={handleToggleModal} onSave={handleSave}/>
